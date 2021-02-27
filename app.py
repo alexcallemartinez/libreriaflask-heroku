@@ -11,10 +11,11 @@ from controllers.sede import SedesController,SedeModel,LibroCategoriaSedeControl
 from controllers.sede import LibroSedeController
 from models.categoria import CategoriaModel
 from flask_cors import CORS
+import os
 
 from flask_swagger_ui import get_swaggerui_blueprint
 
-SWAGGER_URL='/docs'
+SWAGGER_URL=''
 
 API_URL='/static/swagger.json'
 swagger_blueprint=get_swaggerui_blueprint(
@@ -31,7 +32,7 @@ app = Flask(__name__)
 app.register_blueprint(swagger_blueprint)
 # https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-format
 #                                    formato://username:password@host:port/databasename
-app.config['SQLALCHEMY_DATABASE_URI']='mysql://kantmhbzt55tmdvd:t629jbir8xtmlumw@qz8si2yulh3i7gl3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/jvxqvp8w91756ihn'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ['JAWSDB_URL']
 api = Api(app)
 CORS(app)
 #'mysql://root:root@localhost:3306/flasklibreria'
